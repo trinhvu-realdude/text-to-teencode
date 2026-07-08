@@ -8,7 +8,7 @@ export const TENEECODE_MAPPING = new Map<string, string>([
     ["ạ", "4."],
 
     // ă
-    ["ă", "4"],
+    ["ă", "4v"],
     ["ằ", "4v`"],
     ["ắ", "4v'"],
     ["ẳ", "4v?"],
