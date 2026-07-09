@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { TENEECODE_MAPPING } from "./constant";
-import { convertToTeencode } from "./converter";
+import { convertToTeencode, convertFromTeencode } from "./converter";
 
 function App() {
     const [inputText, setInputText] = useState("");
-    const [teencodeText, setTeencodeText] = useState("");
+    const [outputText, setOutputText] = useState("");
+    const [mode, setMode] = useState<"text-to-teencode" | "teencode-to-text">("text-to-teencode");
     const [copied, setCopied] = useState(false);
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -30,13 +31,17 @@ function App() {
     );
 
     useEffect(() => {
-        setTeencodeText(convertToTeencode(inputText, customMapping));
-    }, [inputText, customMapping]);
+        if (mode === "text-to-teencode") {
+            setOutputText(convertToTeencode(inputText, customMapping));
+        } else {
+            setOutputText(convertFromTeencode(inputText, customMapping));
+        }
+    }, [inputText, customMapping, mode]);
 
     const handleCopy = async () => {
-        if (!teencodeText) return;
+        if (!outputText) return;
         try {
-            await navigator.clipboard.writeText(teencodeText);
+            await navigator.clipboard.writeText(outputText);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         } catch (err) {
@@ -66,6 +71,14 @@ function App() {
         <div className="app-container">
             <header className="header">
                 <h1>Teencode Converter</h1>
+                <div className="toolbar">
+                    <button
+                        className="switch-mode-btn"
+                        onClick={() => setMode(prev => prev === "text-to-teencode" ? "teencode-to-text" : "text-to-teencode")}
+                    >
+                        <span className="switch-icon">⇄</span>{mode === "text-to-teencode" ? "Text → Teencode" : "Teencode → Text"}
+                    </button>
+                </div>
             </header>
 
             <div className="workspace">
@@ -73,7 +86,7 @@ function App() {
                     {/* Input Panel */}
                     <div className="panel">
                         <div className="panel-header">
-                            <span className="panel-title">Original Text</span>
+                            <span className="panel-title">{mode === "text-to-teencode" ? "Original Text" : "Teencode Input"}</span>
                         </div>
                         <div className="textarea-wrapper">
                             <textarea
@@ -89,22 +102,22 @@ function App() {
                     {/* Output Panel */}
                     <div className="panel">
                         <div className="panel-header">
-                            <span className="panel-title">Teencode Output</span>
+                            <span className="panel-title">{mode === "text-to-teencode" ? "Teencode Output" : "Text Output"}</span>
                         </div>
                         <div className="text-display-wrapper">
-                            {teencodeText ? (
+                            {outputText ? (
                                 <div className="normal-text-display">
-                                    {teencodeText}
+                                    {outputText}
                                 </div>
                             ) : (
                                 <div className="placeholder-text">
-                                    Teencode for you...
+                                    {mode === "text-to-teencode" ? "Teencode for you..." : "Original text for you..."}
                                 </div>
                             )}
                             <button
                                 className={`copy-btn floating-copy-btn ${copied ? "copied" : ""}`}
                                 onClick={handleCopy}
-                                disabled={!teencodeText}
+                                disabled={!outputText}
                                 aria-label="Copy output"
                             >
                                 {copied ? "Copied" : "Copy"}

@@ -3,7 +3,8 @@
   /* Explicit width — never auto-sized by content.
      min() ensures it fits on smaller screens. */
   width: min(1000px, 100vw - 4rem);
-  flex-shrink: 0; /* flex item must not shrink below this */
+  flex-shrink: 0;
+  /* flex item must not shrink below this */
   padding: 2rem;
   position: relative;
   z-index: 1;
@@ -27,6 +28,36 @@
   color: var(--text-secondary);
 }
 
+.toolbar {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.switch-mode-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.switch-mode-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #555;
+}
+
+.switch-icon {
+  font-size: 1.1rem;
+}
+
 /* ─── Workspace card ─── */
 .workspace {
   border: 1px solid var(--border-color);
@@ -46,9 +77,12 @@
 }
 
 .panel {
-  flex: 0 0 50%;    /* hard-locked: no grow, no shrink, exactly 50% */
-  width: 50%;       /* redundant but explicit */
-  overflow: hidden; /* clip — nothing inside can push the panel wider */
+  flex: 0 0 50%;
+  /* hard-locked: no grow, no shrink, exactly 50% */
+  width: 50%;
+  /* redundant but explicit */
+  overflow: hidden;
+  /* clip — nothing inside can push the panel wider */
   display: flex;
   flex-direction: column;
   background: var(--bg-card);
@@ -63,10 +97,12 @@
   .panels {
     flex-direction: column;
   }
+
   .panel {
     flex: 0 0 100%;
     width: 100%;
   }
+
   .panel:first-child {
     border-right: none;
     border-bottom: 1px solid var(--border-color);
@@ -81,7 +117,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255,255,255,0.01);
+  background: rgba(255, 255, 255, 0.01);
 }
 
 .panel-title {
@@ -133,7 +169,7 @@
 }
 
 .clean-textarea:focus {
-  background: rgba(255,255,255,0.005);
+  background: rgba(255, 255, 255, 0.005);
 }
 
 /* ─── Output text display ─── */
@@ -165,16 +201,19 @@
 .normal-text-display::-webkit-scrollbar {
   width: 8px;
 }
+
 .clean-textarea::-webkit-scrollbar-track,
 .normal-text-display::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .clean-textarea::-webkit-scrollbar-thumb,
 .normal-text-display::-webkit-scrollbar-thumb {
   background: #2a2a2a;
   border-radius: 10px;
   border: 2px solid var(--bg-card);
 }
+
 .clean-textarea::-webkit-scrollbar-thumb:hover,
 .normal-text-display::-webkit-scrollbar-thumb:hover {
   background: #444;
@@ -202,7 +241,7 @@
   bottom: 1rem;
   right: 1.2rem;
   z-index: 10;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .copy-btn:hover {
@@ -236,7 +275,7 @@
 }
 
 .accordion-header:hover {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .accordion-icon {
@@ -261,7 +300,7 @@
 .settings-header {
   padding: 1.5rem;
   border-bottom: 1px solid var(--border-color);
-  background: rgba(255,255,255,0.01);
+  background: rgba(255, 255, 255, 0.01);
   text-align: center;
 }
 
@@ -321,7 +360,7 @@
 }
 
 .setting-input:focus {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 4px;
 }
 
@@ -333,14 +372,17 @@
 .settings-grid::-webkit-scrollbar {
   width: 8px;
 }
+
 .settings-grid::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .settings-grid::-webkit-scrollbar-thumb {
   background: #2a2a2a;
   border-radius: 10px;
   border: 2px solid var(--bg-card);
 }
+
 .settings-grid::-webkit-scrollbar-thumb:hover {
   background: #444;
 }
